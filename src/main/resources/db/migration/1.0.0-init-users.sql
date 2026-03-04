@@ -1,7 +1,7 @@
 --liquibase formatted sql
---changeset petrm:1.0.0-users
+--changeset petrm:1.0.0-init-users
 
--- TODO доделать чейнжсеты (добавить ост поля и еще таблицы)
+-- TODO изменить тип поля role на enum
 CREATE TABLE users (
     id          BIGINT          GENERATED ALWAYS AS IDENTITY        PRIMARY KEY,
     username    VARCHAR(255)    NOT NULL                            UNIQUE,

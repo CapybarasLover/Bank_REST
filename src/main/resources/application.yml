@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  application:
+    name: bank-rest
   datasource:
     url: jdbc:postgresql://db:5432/${POSTGRES_DB} # для использования в контейнере используем db, в случае локального запуска на машине - localhost
     username: ${POSTGRES_USER}
@@ -8,11 +10,11 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     generate-ddl: true
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+    change-log: classpath:db/migration/db.changelog-master.yaml
 
 #  - Настроить параметры безопасности и JWT.
 #  - Включить Swagger UI.
