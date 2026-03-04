@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
       file: ./1.0.0-init-users.sql
+  - include:
+      file: ./1.0.1-init-cards.sql
