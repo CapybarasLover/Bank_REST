@@ -1,28 +1,25 @@
 package com.example.bankcards.entity;
 
-import io.jsonwebtoken.security.Password;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.hibernate.validator.constraints.Length;
+import jakarta.persistence.*;
 
 @Entity(name="users")
 public class User {
     public User() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Length(max=255)
+    @Column(length=255, unique=true, nullable=false)
     String username;
 
-    @Length(max=255)
+    @Column(length=255, nullable=false)
     String password;
 
-    @Length(max=255)
+    @Column(length=50,nullable=false)
     String role;
 
+    @Column(nullable=false)
     Boolean enabled;
 
     public Long getId() {
