@@ -10,11 +10,11 @@ CREATE TYPE status AS ENUM('ACTIVE', 'BLOCKED', 'EXPIRED');
 
 
 CREATE TABLE cards(
-    id              BIGINT      GENERATED ALWAYS AS IDENTITY        PRIMARY KEY,
+    id              BIGINT              GENERATED ALWAYS AS IDENTITY        PRIMARY KEY,
     card_number     varchar(19)         NOT NULL        UNIQUE,
-    cardholder      BIGINT      NOT NULL,
-    valid_date      DATE        NOT NULL,
-    status          status      NOT NULL    DEFAULT 'ACTIVE',
+    cardholder      BIGINT              NOT NULL,
+    valid_date      DATE                NOT NULL,
+    status          status              NOT NULL    DEFAULT 'ACTIVE',
     balance         DECIMAL(19,2)       NOT NULL       DEFAULT 0.00        CHECK(balance>=0),
 
     CONSTRAINT      fk_cardholders
