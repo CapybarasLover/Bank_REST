@@ -14,8 +14,8 @@ CREATE TABLE cards(
     card_number     varchar(19)         NOT NULL        UNIQUE,
     cardholder      BIGINT              NOT NULL,
     valid_date      DATE                NOT NULL,
-    status          status              NOT NULL    DEFAULT 'ACTIVE',
-    balance         DECIMAL(19,2)       NOT NULL       DEFAULT 0.00        CHECK(balance>=0),
+    status          status              NOT NULL        DEFAULT 'ACTIVE',
+    balance         DECIMAL(19,2)       NOT NULL        DEFAULT 0.00        CHECK(balance>=0),
 
     CONSTRAINT      fk_cardholders
         FOREIGN KEY (cardholder)
