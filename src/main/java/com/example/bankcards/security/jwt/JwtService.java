@@ -1,4 +1,4 @@
-package com.example.bankcards.security;
+package com.example.bankcards.security.jwt;
 
 
 import com.example.bankcards.dto.JwtAuthenticationDto;
@@ -9,15 +9,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.ExemptionMechanismException;
 import javax.crypto.SecretKey;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 
 @Component
-public class JwtUtil {
-    private static final Logger LOGGER = LogManager.getLogger(JwtUtil.class);
+public class JwtService {
+    private static final Logger LOGGER = LogManager.getLogger(JwtService.class);
 
     private final String secret = System.getenv("JWT_SECRET");
 
@@ -38,7 +37,7 @@ public class JwtUtil {
         return jwtDto;
     }
 
-    private String getEmailFromToken(String token){
+    public String getUsernameFromToken(String token){
         Claims payload = Jwts.parser()
                 .verifyWith(getSecreteKey())
                 .build()
@@ -47,7 +46,7 @@ public class JwtUtil {
         return payload.getSubject();
     }
 
-    private boolean validateToken(String token){
+    public boolean validateToken(String token){
         try{
            Jwts.parser()
                    .verifyWith(getSecreteKey())
