@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity(name="users")
-public class User implements UserDetails {
+public class User {
     public User() {}
 
     @Id
@@ -67,30 +67,5 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
     }
 }

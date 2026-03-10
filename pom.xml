@@ -51,6 +51,17 @@
             <version>0.12.6</version>
             <scope>runtime</scope>
         </dependency>
+        <!--                         мапстракт                                 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.5.Final</version>
+        </dependency>
         <!--                        валидация                                 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
