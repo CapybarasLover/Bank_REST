@@ -1,14 +1,18 @@
 package com.example.bankcards.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity(name="cards")
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Card {
-    public Card(){};
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -30,51 +34,4 @@ public class Card {
     @Column(nullable=false)
     BigDecimal balance;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCard_number() {
-        return card_number;
-    }
-
-    public void setCard_number(String card_number) {
-        this.card_number = card_number;
-    }
-
-    public User getCardholder() {
-        return cardholder;
-    }
-
-    public void setCardholder(User cardholder) {
-        this.cardholder = cardholder;
-    }
-
-    public Date getValid_date() {
-        return valid_date;
-    }
-
-    public void setValid_date(Date valid_date) {
-        this.valid_date = valid_date;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
 }

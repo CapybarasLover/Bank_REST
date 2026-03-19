@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.naming.AuthenticationException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -30,12 +30,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public JwtAuthenticationDto singIn(UserCredentialsDto userCredentialsDto) throws AuthenticationException {
-        User user = userRepository.findByCredentials(userCredentialsDto);
+        User user = findByCredentials(userCredentialsDto);
         return jwtService.generateAuthToken(claims, user.getUsername());
-    }
-
-    private User findByCredentials(UserCredentialsDto userCredentialsDto) {
-        return null;
     }
 
     @Override
@@ -48,19 +44,39 @@ public class UserServiceImpl implements UserService{
         throw new  AuthenticationException("Invalid refresh token");
     }
 
+    @Override
+    public UserDto getUserByUsername(String username) throws ChangeSetPersister.NotFoundException {
+        return userMapper.toDto(userRepository.findByUsername(username)
+                .orElseThrow(ChangeSetPersister.NotFoundException::new));
+    }
+
+    @Override
+    public UserDto getUserById(Long id) throws ChangeSetPersister.NotFoundException {
+        return userMapper.toDto(userRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new));
+    }
+
+    @Override
+    public String addUser(UserDto userData) {
+        User user = userMapper.toEntity(userData);
+        userRepository.save(user);
+        return "User added";
+    }
+
     private User findByUsername(String usernameFromToken) throws Exception {
         return userRepository.findByUsername(usernameFromToken).orElseThrow(()->
                 new Exception(String.format("User with username %s not found", usernameFromToken)));
     }
 
-    @Override
-    public UserDto getUserByUsername(String username) throws ChangeSetPersister.NotFoundException {
 
-        return null;
-    }
+    private User findByCredentials(UserCredentialsDto userCredentialsDto) throws AuthenticationException{
+        Optional<User> optionalUser = userRepository.findByUsername(userCredentialsDto.getUsername());
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            if(passwordEncoder.matches(userCredentialsDto.getPassword(), user.getPassword())){
+                return user;
+            }
 
-    @Override
-    public String addUser(UserDto user) {
-        return "";
+        }
+        throw new AuthenticationException("Username or password is not correct");
     }
 }
