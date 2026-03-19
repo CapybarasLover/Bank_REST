@@ -8,6 +8,7 @@ import com.example.bankcards.entity.User;
 import com.example.bankcards.mapper.UserMapper;
 import com.example.bankcards.repository.UserRepository;
 import com.example.bankcards.security.jwt.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl implements UserService{
 
@@ -24,23 +26,11 @@ public class UserServiceImpl implements UserService{
     private final UserMapper userMapper;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
-    Map<String, Object> claims;
-
-    public UserServiceImpl(UserRepository userRepository,
-                           UserMapper userMapper,
-                           JwtService jwtService,
-                           PasswordEncoder passwordEncoder
-                           ) {
-        this.jwtService = jwtService;
-        this.userMapper = userMapper;
-        this.passwordEncoder = passwordEncoder;
-        this.userRepository = userRepository;
-        claims = new HashMap<String, Object>();
-    }
+    private final Map<String, Object> claims =  new HashMap<String, Object>();
 
     @Override
     public JwtAuthenticationDto singIn(UserCredentialsDto userCredentialsDto) throws AuthenticationException {
-        User user = findByCredentials(userCredentialsDto);
+        User user = userRepository.findByCredentials(userCredentialsDto);
         return jwtService.generateAuthToken(claims, user.getUsername());
     }
 
@@ -65,12 +55,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDto getUserByUsername(String username) throws ChangeSetPersister.NotFoundException {
+
         return null;
     }
 
     @Override
     public String addUser(UserDto user) {
-        User
         return "";
     }
 }
