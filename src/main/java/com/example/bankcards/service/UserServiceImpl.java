@@ -4,6 +4,7 @@ import com.example.bankcards.dto.JwtAuthenticationDto;
 import com.example.bankcards.dto.RefreshTokenDto;
 import com.example.bankcards.dto.UserCredentialsDto;
 import com.example.bankcards.dto.UserDto;
+import com.example.bankcards.entity.Role;
 import com.example.bankcards.entity.User;
 import com.example.bankcards.mapper.UserMapper;
 import com.example.bankcards.repository.UserRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.naming.AuthenticationException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -57,7 +59,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String addUser(UserDto userData) {
+        userData.setRole(Objects.requireNonNullElse(userData.getRole(), Role.ROLE_USER));
+        userData.setEnabled(Objects.requireNonNullElse(userData.getEnabled(), true));
         User user = userMapper.toEntity(userData);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return "User added";
     }

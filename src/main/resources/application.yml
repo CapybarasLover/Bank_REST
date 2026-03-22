@@ -4,7 +4,7 @@ spring:
   application:
     name: bank-rest
   datasource:
-    url: jdbc:postgresql://db:5432/${POSTGRES_DB} # для использования в контейнере используем db, в случае локального запуска на машине - localhost
+    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB} # для использования в контейнере используем db, в случае локального запуска на машине - localhost
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
   jpa:

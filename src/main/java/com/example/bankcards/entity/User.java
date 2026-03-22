@@ -1,9 +1,8 @@
 package com.example.bankcards.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.Objects;
 
 @Entity(name="users")
@@ -21,8 +20,8 @@ public class User {
     @Column(length=255, nullable=false)
     String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @Enumerated(value = EnumType.STRING)
     Role role;
 
     @Column(nullable=false)
