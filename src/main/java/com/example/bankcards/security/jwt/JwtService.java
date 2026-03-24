@@ -20,7 +20,7 @@ public class JwtService {
 
     private final String secret = System.getenv("JWT_SECRET");
 
-    private final int expirationTimeToken = 1000 * 60; // токен действителен 1 минуты
+    private final int expirationTimeToken = 1000 * 60 * 10; // токен действителен 5 минуты
     private final int expirationTimeRefreshToken = 1000 * 60 * 60 * 48; // рефреш токен доступен в течение двух суток
 
     public JwtAuthenticationDto generateAuthToken(Map<String, Object> claims, String username){
