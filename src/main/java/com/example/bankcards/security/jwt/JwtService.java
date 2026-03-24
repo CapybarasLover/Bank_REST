@@ -63,8 +63,11 @@ public class JwtService {
         }catch (SecurityException jwtEx){
             LOGGER.error("Security Exception:", jwtEx);
         }
+        catch (JwtException jwtEx){
+            LOGGER.error("Invalid token:", jwtEx);
+        }
         catch (Exception jwtEx){
-            LOGGER.error("invalid token:", jwtEx);
+            LOGGER.error("Unexpected error with jwt:", jwtEx);
         }
         return false;
     }
