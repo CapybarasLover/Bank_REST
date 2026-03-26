@@ -1,12 +1,10 @@
 server:
   port: 8080
 spring:
+  profiles:
+    active: dev # для использования в контейнере используем prod, в случае локального запуска на машине - dev
   application:
     name: bank-rest
-  datasource:
-    url: jdbc:postgresql://localhost:5432/${POSTGRES_DB} # для использования в контейнере используем db, в случае локального запуска на машине - localhost
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
