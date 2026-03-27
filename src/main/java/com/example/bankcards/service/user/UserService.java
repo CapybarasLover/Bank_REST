@@ -1,4 +1,4 @@
-package com.example.bankcards.service;
+package com.example.bankcards.service.user;
 
 import com.example.bankcards.dto.JwtAuthenticationDto;
 import com.example.bankcards.dto.RefreshTokenDto;

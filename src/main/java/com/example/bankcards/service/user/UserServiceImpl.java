@@ -1,4 +1,4 @@
-package com.example.bankcards.service;
+package com.example.bankcards.service.user;
 
 import com.example.bankcards.dto.JwtAuthenticationDto;
 import com.example.bankcards.dto.RefreshTokenDto;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;

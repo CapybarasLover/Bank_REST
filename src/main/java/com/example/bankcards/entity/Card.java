@@ -14,9 +14,6 @@ import java.sql.Date;
 @RequiredArgsConstructor
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-
     @Column(length=19, unique=true, nullable=false)
     String card_number;
 
@@ -33,5 +30,4 @@ public class Card {
 
     @Column(nullable=false)
     BigDecimal balance;
-
 }

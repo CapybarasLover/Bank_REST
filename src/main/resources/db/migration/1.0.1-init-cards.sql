@@ -3,8 +3,7 @@
 --changeset petrm:1.0.1-init-cards
 
 CREATE TABLE cards(
-    id              BIGINT              GENERATED ALWAYS AS IDENTITY        PRIMARY KEY,
-    card_number     VARCHAR(19)         NOT NULL        UNIQUE,
+    card_number     VARCHAR(19)         NOT NULL        UNIQUE              PRIMARY KEY,
     cardholder      BIGINT              NOT NULL,
     valid_date      DATE                NOT NULL,
     status          VARCHAR(10)         NOT NULL        DEFAULT 'ACTIVE',
